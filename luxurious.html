@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxurious Scroll Animation</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #fafafa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        h1, h2, p {
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+        }
+
+        /* Base styles for animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .zoom-in {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .zoom-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slide-in {
+            opacity: 0;
+            transform: translateX(-100%);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .slide-in.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 20px;
+        }
+
+        img {
+            width: 300px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            color: white;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer Styling */
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            background: #333;
+            color: white;
+            text-align: center;
+            border-radius: 0 0 15px 15px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            img {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .image-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section>
+            <h1 class="fade-up">Welcome to My Luxurious Website</h1>
+            <p class="fade-up">Scroll down to experience elegance in every detail.</p>
+        </section>
+        
+        <section>
+            <div class="image-container">
+                <img src="https://via.placeholder.com/300" class="zoom-in" alt="Image 1">
+                <img src="https://via.placeholder.com/300" class="zoom-in" alt="Image 2">
+            </div>
+            <h2 class="slide-in">Experience Luxury Like Never Before!</h2>
+            <p class="fade-up">Every element is designed to captivate and inspire.</p>
+        </section>
+        
+        <footer>
+            <p>© 2024 My Luxurious Website</p>
+        </footer>
+    </div>
+
+    <script>
+        const elementsToAnimate = document.querySelectorAll('.fade-up, .zoom-in, .slide-in');
+
+        const checkVisibility = () => {
+            const triggerBottom = window.innerHeight / 5 * 4;
+
+            elementsToAnimate.forEach((element) => {
+                const box = element.getBoundingClientRect();
+                if (box.top < triggerBottom) {
+                    element.classList.add('visible');
+                } else {
+                    element.classList.remove('visible'); // Optional: Remove class when scrolling back up
+                }
+            });
+        };
+
+        window.addEventListener('scroll', checkVisibility);
+        checkVisibility(); // Check visibility on page load
+    </script>
+</body>
+</html>
